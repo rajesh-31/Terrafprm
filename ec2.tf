@@ -1,12 +1,5 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
+provider "aws" {
+  region = "us-east-1"  # Change this to your desired AWS region
 }
 
 # Define an AWS key pair for SSH access
