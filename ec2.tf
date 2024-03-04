@@ -4,12 +4,12 @@ provider "aws" {
 
 # Define an AWS key pair for SSH access
 resource "aws_key_pair" "example_key_pair" {
-  key_name   = "example-key-pair"
+  key_name   = "my-key-pair"
   public_key = file("~/.ssh/id_rsa.pub")  # Replace with the path to your public key
 }
 
  resource "aws_security_group" "example_security_group" {
-  name        = "example-security-group"
+  name        = "my-security-group"
   description = "Example security group with dynamic ingress rules"
   vpc_id      = "ami-07d9b9ddc6cd8dd30" # Replace with your VPC ID
 
@@ -31,6 +31,6 @@ resource "aws_instance" "app_server" {
   vpc_security_group_ids = ["${aws_security_group.example_security_group.id}"]
   
   tags = {
-    Name = "ExampleInstance"
+    Name = "MyTerraformInstance"
   }
 }
