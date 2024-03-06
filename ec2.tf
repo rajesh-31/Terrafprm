@@ -25,7 +25,7 @@ resource "aws_key_pair" "example_key_pair" {
 }
 
 resource "aws_instance" "app_server" {
-  ami            = "ami-03f4878755434977f"
+  ami            = "ami-07d9b9ddc6cd8dd30"
   instance_type  = "t2.micro"
   key_name       = "${aws_key_pair.example_key_pair.key_name}"  # Associate the key pair with the instance
   vpc_security_group_ids = ["${aws_security_group.example_security_group.id}"]
