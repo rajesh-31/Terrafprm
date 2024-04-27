@@ -5,7 +5,7 @@ provider "aws" {
 # Define an AWS key pair for SSH access
 resource "aws_key_pair" "example_key_pair" {
   key_name   = "my-key-pair"
-  public_key = file("~/.ssh/id_rsa.pub")  # Replace with the path to your public key
+  public_key = file("~/.ssh/id_ed25519.pub")  # Replace with the path to your public key
 }
 
  resource "aws_security_group" "example_security_group" {
