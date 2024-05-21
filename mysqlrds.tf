@@ -1,27 +1,32 @@
 provider "aws" {
-  region = "us-east-1"  # Change this to your desired AWS region
+  region = "us-east-1"  # Modify this to your desired AWS region
 }
 
-resource "aws_db_subnet_group" "custom_subnet_group" {
-  name        = "custom-subnet-group"
-  description = "Custom DB subnet group"
-  subnet_ids  = ["subnet-003077a556a405c56", "subnet-098fdd300ccdd747d"]  # Specify your subnet IDs
+resource "aws_db_subnet_group" "example" {
+  name       = "example-subnet-group"
+  subnet_ids = ["subnet-12345678", "subnet-87654321"]  # Modify these with your actual subnet IDs
+  tags = {
+    Name = "example-subnet-group"
+  }
 }
 
-resource "aws_db_instance" "myrds" {
-   allocated_storage   = 20
-   storage_type        = "gp2"
-   identifier          = "rdstf"
-   engine              = "mysql"
-   engine_version      = "8.0.35"
-   instance_class      = "db.t3.micro"
-   username            = "admin"
-   password            = "Passw0rd!123"
-   publicly_accessible = true
-   skip_final_snapshot = true
-   db_subnet_group_name = aws_db_subnet_group.custom_subnet_group.name
+resource "aws_db_instance" "example" {
+  identifier            = "example-mysql-db"
+  allocated_storage     = 20  # Specify storage size in GB
+  engine                = "mysql"
+  engine_version        = "8.0"  # You can change the version if needed
+  instance_class        = "db.t2.micro"  # Choose an appropriate instance class
+  username              = "admin"
+  password              = "password"  # Replace with your desired password
+  db_subnet_group_name  = aws_db_subnet_group.example.name
+  publicly_accessible   = false
+  skip_final_snapshot   = true
 
-   tags = {
-     Name = "MyRDS"
-   }
- }
+  tags = {
+    Name = "example-mysql-db"
+  }
+}
+
+output "db_endpoint" {
+  value = aws_db_instance.example.endpoint
+}
